@@ -31,6 +31,14 @@ import Navbar from "./component/Navbar";
 import Register from "./component/Register";
 import Login from "./component/Login";
 import Userprofile from "./component/Userprofile";
+import Editprofile from "./component/Editprofile";
+import Logout from "./component/Logout";
+import Registercar from "./component/Registercar";
+import Getallcars from "./component/Getallcars";
+import Viewcar from "./component/Viewcar";
+import Updatecar from "./component/Updatecar";
+import Bookcar from "./component/Bookcar";
+import Confirmbooking from "./component/Confirmbooking";
 import Errorpage from "./component/Errorpage";
 
 const App = () => {
@@ -41,6 +49,14 @@ const App = () => {
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/userprofile" component={Userprofile} />
+      <Route exact path="/editprofile" component={Editprofile} />
+      <Route exact path="/logout" component={Logout} />
+      <Route exact path="/registercar" component={Registercar} />
+      <Route exact path="/getallcars" component={Getallcars} />
+      <Route exact path="/viewcar/:id" component={Viewcar} />
+      <Route exact path="/updatecar/:id" component={Updatecar} />
+      <Route exact path="/bookcar" component={Bookcar} />
+      <Route exact path="/confirmbooking/:id" component={Confirmbooking} />
     </>
   )
 }
