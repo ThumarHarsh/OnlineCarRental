@@ -13,6 +13,7 @@ mongoose
   });
 app.use(express.json());
 app.use(cookieParser());
+app.use("/public", express.static("public"));
 // const User = require("./model/userSchema");
 app.use(require("./routes/auth"));
 

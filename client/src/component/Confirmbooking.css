@@ -1,0 +1,18 @@
+.card1 {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-bottom: 30x;
+  margin-right: 30px;
+}
+.main1 {
+  background-image: url(../images/bg.jpg);
+}
+.row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.card1:hover {
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+  transform: scale(1.1);
+}

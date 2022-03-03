@@ -25,7 +25,7 @@
 // export default App;
 
 import React from "react";
-import { Route } from 'react-router-dom';
+import { Route } from "react-router-dom";
 import Homepage from "./component/Homepage";
 import Navbar from "./component/Navbar";
 import Register from "./component/Register";
@@ -40,6 +40,7 @@ import Updatecar from "./component/Updatecar";
 import Bookcar from "./component/Bookcar";
 import Confirmbooking from "./component/Confirmbooking";
 import Errorpage from "./component/Errorpage";
+import Footer from "./component/Footer";
 
 const App = () => {
   return (
@@ -57,7 +58,8 @@ const App = () => {
       <Route exact path="/updatecar/:id" component={Updatecar} />
       <Route exact path="/bookcar" component={Bookcar} />
       <Route exact path="/confirmbooking/:id" component={Confirmbooking} />
+      <Footer />
     </>
-  )
-}
-export default App
+  );
+};
+export default App;
