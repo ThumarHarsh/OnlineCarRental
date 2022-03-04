@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import Slider from "./Slider";
 import Content from "./Content";
 import { Route, Switch } from "react-router-dom";
-import Pagenotfound from "./PageNotFound";
+import PageNotFound from "./PageNotFound";
 
 const Homepage = () => {
   return (
@@ -13,9 +13,6 @@ const Homepage = () => {
         <Route path="/" exact>
           <Slider />
           <Content />
-        </Route>
-        <Route>
-          <Pagenotfound />
         </Route>
       </Switch>
     </div>

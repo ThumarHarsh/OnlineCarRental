@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import car_default_pic from "../car_pic_default/defaultpic.png";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import { useHistory } from "react-router-dom";
+import "./Bookcar.css";
 
 const Getallcars = () => {
+  const history = useHistory();
   const [carData, setcarData] = useState([]);
   const callallcars = async () => {
     try {
@@ -19,6 +25,7 @@ const Getallcars = () => {
       setcarData(data);
     } catch (err) {
       console.log(err);
+      history.push("/");
     }
   };
 
@@ -28,27 +35,47 @@ const Getallcars = () => {
 
   return (
     <>
-      {carData.map((curElm) => {
-        return (
-          <>
-            <div key={curElm._id}>
-              <p>Car Company:&emsp;{curElm.companyname}</p>
-              {/* <p>Car Class:&emsp;{curElm.carclass}</p>
-                                <p>Car Model:&emsp;{curElm.carmodel}</p>
-                                <p>Car Transmission:&emsp;{curElm.transmissiontype}</p>
-                                <p>Car Number:&emsp;{curElm.carnumber}</p>
-                                <p>Car FuelType:&emsp;{curElm.fueltype}</p>
-                                <p>Car Price Per Day:&emsp;{curElm.priceperday}</p>
-                                <p>Car seatings:&emsp;{curElm.seatingcapacity}</p> */}
-              <Link to={`/viewcar/${curElm._id}`}>
-                <button>View Car</button>
-              </Link>
-            </div>
-            <br></br>
-            <br></br>
-          </>
-        );
-      })}
+      <div className="Container">
+        <div className="row">
+          {carData.map((curElm) => {
+            return (
+              <>
+                <Col>
+                  <div key={curElm._id}>
+                    <Card
+                      className="text-center card2"
+                      ss
+                      style={{ width: "18rem" }}
+                    >
+                      <Card.Header></Card.Header>
+                      <Card.Body>
+                        <Card.Title>
+                          {curElm.companyname}&nbsp;
+                          {curElm.carmodel}
+                        </Card.Title>
+                        <Card.Text></Card.Text>
+                        <Link to={`/viewcar/${curElm._id}`}>
+                          <Button variant="primary">View Car</Button>
+                        </Link>
+                      </Card.Body>
+                    </Card>
+                  </div>
+                </Col>
+              </>
+            );
+          })}
+        </div>
+      </div>
+      <div style={{ alignItems: "center" }}>
+        <Link to={`/adminpanel`}>
+          <Button
+            variant="primary"
+            style={{ textAlign: "center", margin: "10px" }}
+          >
+            Back to Panel
+          </Button>
+        </Link>
+      </div>
     </>
   );
 };

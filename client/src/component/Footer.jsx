@@ -81,12 +81,12 @@ const Footer = () => {
         <h3>Connect with us</h3>
         <div className="social">
           <div>
-            <a herf="#">
+            <a herf="https://www.instagram.com/">
               <i className="fa fa-instagram"></i>
             </a>
           </div>
           <div>
-            <a herf="#">
+            <a herf="https://www.facebook.com/">
               <i className="fa fa-facebook-square"></i>
             </a>
           </div>

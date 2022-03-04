@@ -24,7 +24,7 @@
 
 // export default App;
 
-import React from "react";
+import React, { createContext, useReducer } from "react";
 import { Route } from "react-router-dom";
 import Homepage from "./component/Homepage";
 import Navbar from "./component/Navbar";
@@ -41,24 +41,47 @@ import Bookcar from "./component/Bookcar";
 import Confirmbooking from "./component/Confirmbooking";
 import Errorpage from "./component/Errorpage";
 import Footer from "./component/Footer";
+import PageNotFound from "./component/PageNotFound";
+import Adminregistration from "./component/Adminregistration";
+import Adminlogin from "./component/Adminlogin";
+import Adminpanel from "./component/Adminpanel";
+import { initialState, reducer } from "../src/reducer/UseReducer";
+import Logout_admin from "./component/Logout_admin";
 
-const App = () => {
+export const UserContext = createContext();
+
+const Routing = () => {
   return (
-    <>
-      <Navbar />
+    <switch>
       <Route exact path="/" component={Homepage} />
+      <Route exact path="/adminpanel" component={Adminpanel} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/userprofile" component={Userprofile} />
       <Route exact path="/editprofile" component={Editprofile} />
       <Route exact path="/logout" component={Logout} />
+      <Route exact path="/logoutadmin" component={Logout_admin} />
       <Route exact path="/registercar" component={Registercar} />
       <Route exact path="/getallcars" component={Getallcars} />
       <Route exact path="/viewcar/:id" component={Viewcar} />
       <Route exact path="/updatecar/:id" component={Updatecar} />
       <Route exact path="/bookcar" component={Bookcar} />
       <Route exact path="/confirmbooking/:id" component={Confirmbooking} />
-      <Footer />
+      <Route exact path="/adminlogin" component={Adminlogin} />
+      <Route exact path="/adminregistration" component={Adminregistration} />
+      {/* <Route component={PageNotFound} /> */}
+    </switch>
+  );
+};
+const App = () => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  return (
+    <>
+      <UserContext.Provider value={{ state, dispatch }}>
+        <Navbar />
+        <Routing />
+        <Footer />
+      </UserContext.Provider>
     </>
   );
 };

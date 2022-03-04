@@ -10,6 +10,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import "./Bookcar.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 // const Bookcar = () => {
 //   const [carData, setcarData] = useState([]);
@@ -108,6 +110,82 @@ import "./Bookcar.css";
 // export default Bookcar;
 
 const Bookcar = () => {
+  // const [carData, setcarData] = useState([]);
+  // const [imagePath, setPath] = useState("");
+  // const [search, setSearch] = useState("");
+  // const [query, setQuery] = useState({
+  //   minamount: null,
+  //   maxamount: null,
+  // });
+  // const [searchData, setSearchData] = useState([]);
+  // const [searchNotFound, setsearchNotFound] = useState(false);
+  // const callavailcar = async () => {
+  //   try {
+  //     const res = await fetch("/availcar", {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //       credentials: "include",
+  //     });
+  //     const data = await res.json();
+  //     // console.log(data);
+  //     setcarData(data);
+  //     setPath("http://localhost:7000/public/carImages/");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   callavailcar();
+  // }, []);
+
+  // let name, value;
+  // const search_input = (e) => {
+  //   name = e.target.name;
+  //   value = e.target.value;
+  //   setQuery({ ...query, [name]: value });
+  // };
+
+  // const SearchData = async (event) => {
+  //   event.preventDefault();
+  //   const { minamount, maxamount } = query;
+  //   if (parseInt(minamount) > parseInt(maxamount)) {
+  //     window.alert("invalid fields");
+  //   } else if (isNaN(query.minamount)) {
+  //     window.alert("data should be a number");
+  //   } else {
+  //     console.log(minamount + maxamount);
+  //     const res = await fetch("/filter", {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //       credentials: "include",
+  //       body: JSON.stringify({
+  //         minamount,
+  //         maxamount,
+  //       }),
+  //     });
+  //     const data = await res.json();
+  //     setSearch("helloworld");
+  //     if (data.length >= 0) {
+  //       setSearchData(data);
+  //     } else {
+  //       setsearchNotFound(true);
+  //     }
+  //     console.log(data);
+  //   }
+  // };
+
+  // const ClearData = () => {
+  //   setQuery({ maxamount: "", minamount: "" });
+  //   setSearch("");
+  // };
+
   const [carData, setcarData] = useState([]);
   const [imagePath, setPath] = useState("");
   const [search, setSearch] = useState("");
@@ -115,6 +193,8 @@ const Bookcar = () => {
     minamount: null,
     maxamount: null,
   });
+  const [selectedstartDate, setStartDate] = useState(null);
+  const [selectedendDate, setEndDate] = useState(null);
   const [searchData, setSearchData] = useState([]);
   const [searchNotFound, setsearchNotFound] = useState(false);
   const callavailcar = async () => {
@@ -146,42 +226,66 @@ const Bookcar = () => {
     value = e.target.value;
     setQuery({ ...query, [name]: value });
   };
+  const handlestartdate = (date) => {
+    setStartDate(date);
+    setEndDate(null);
+  };
 
+  const handleenddate = (date) => {
+    setEndDate(date);
+    if (selectedstartDate === null) {
+      setEndDate(null);
+    }
+  };
   const SearchData = async (event) => {
     event.preventDefault();
     const { minamount, maxamount } = query;
+    console.log(selectedstartDate);
+    console.log(selectedendDate);
+    const startDate = selectedstartDate;
+    const endDate = selectedendDate;
+
     if (parseInt(minamount) > parseInt(maxamount)) {
       window.alert("invalid fields");
     } else if (isNaN(query.minamount)) {
       window.alert("data should be a number");
+    } else if (startDate != null && endDate === null) {
+      window.alert("endDate should not be empty");
     } else {
-      console.log(minamount + maxamount);
-      const res = await fetch("/filter", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          minamount,
-          maxamount,
-        }),
-      });
-      const data = await res.json();
-      setSearch("helloworld");
-      if (data.length >= 0) {
-        setSearchData(data);
-      } else {
-        setsearchNotFound(true);
+      try {
+        const res = await fetch("/filter", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            minamount,
+            maxamount,
+            startDate,
+            endDate,
+          }),
+        });
+        const data = await res.json();
+        setSearch("helloworld");
+        if (data.length >= 0) {
+          setSearchData(data);
+        } else {
+          setsearchNotFound(true);
+        }
+        console.log(data);
+      } catch (err) {
+        console.log(err);
       }
-      console.log(data);
     }
   };
 
   const ClearData = () => {
     setQuery({ maxamount: "", minamount: "" });
     setSearch("");
+    setStartDate(null);
+    setEndDate(null);
   };
 
   const Displaysearch = () => {
@@ -334,31 +438,59 @@ const Bookcar = () => {
 
   return (
     <>
-      <form method="POST">
-        <label>Minamount&emsp;&emsp;&emsp;</label>
-        <input
-          type="text"
-          name="minamount"
-          onChange={search_input}
-          value={search.minamount}
-        />
-        &emsp;&emsp;&emsp;
-        <label>Maxamount&emsp;&emsp;&emsp;</label>
-        <input
-          type="text"
-          name="maxamount"
-          onChange={search_input}
-          value={search.maxamount}
-        />
-        &emsp;&emsp;
-        <button type="submit" onClick={SearchData}>
-          Search
-        </button>
-        &emsp;&emsp;
-      </form>
-      <button type="submit" onClick={ClearData}>
-        Clear Search
-      </button>
+      <div className="datepick">
+        <form method="POST">
+          <div style={{ width: "300px", float: "left" }}>
+            <label>Search Date:&emsp;&emsp;&emsp;</label>
+            <DatePicker
+              selected={selectedstartDate}
+              onChange={handlestartdate}
+              dateFormat="dd-MM-yyyy"
+              minDate={new Date()}
+            />
+            <br></br>
+            &emsp;&emsp;&emsp;
+            <label>To : &emsp;&emsp;&emsp;</label>
+            <DatePicker
+              selected={selectedendDate}
+              onChange={handleenddate}
+              dateFormat="dd-MM-yyyy"
+              minDate={selectedstartDate}
+            />
+          </div>
+          <div style={{ width: "300px", float: "right" }}>
+            <label>Minamount&emsp;&emsp;&emsp;</label>
+            <input
+              type="text"
+              name="minamount"
+              onChange={search_input}
+              value={query.minamount}
+            />
+            &emsp;&emsp;&emsp;
+            <label>Maxamount&emsp;&emsp;&emsp;</label>
+            <input
+              type="text"
+              name="maxamount"
+              onChange={search_input}
+              value={query.maxamount}
+            />
+          </div>
+          &emsp;&emsp;
+          <br></br>
+          <div style={{ width: "450px", float: "right" }}>
+            <Button variant="outline-secondary" onClick={SearchData}>
+              Search
+            </Button>
+            &emsp;&emsp;
+            <br></br>
+            <br></br>
+            <Button variant="outline-secondary" onClick={ClearData}>
+              Clear
+            </Button>
+          </div>
+        </form>
+      </div>
+      <br></br>
 
       {search ? <Displaysearch /> : <DisplayRegular />}
     </>

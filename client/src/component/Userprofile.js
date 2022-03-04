@@ -39,74 +39,52 @@ const Userprofile = () => {
 
   return (
     <>
-      <h1 style={{ textAlign: "center", margin: "20px" }}>User Profile</h1>
-      <form
-        method="POST"
-        style={{ margin: "0 auto", width: "540px", margin: "70px" }}
+      <h1 style={{ textAlign: "center", margin: "10px" }}>User Profile</h1>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
       >
-        <Card style={{ width: "23rem", justify: "center" }} className="card1">
-          <Card.Header>Your Profile</Card.Header>
-          <ListGroup className="list-group-flush">
-            <ListGroupItem variant="success">
-              Name:&emsp;{userData.name}
-            </ListGroupItem>
-            <ListGroupItem variant="info">
-              Email:&emsp;{userData.email}
-            </ListGroupItem>
-            <ListGroupItem variant="success">
-              Phone:&emsp;{userData.phone}
-            </ListGroupItem>
-            <ListGroupItem variant="info">
-              City:&emsp;{userData.city}
-            </ListGroupItem>
-            <ListGroupItem variant="success">
-              State:&emsp;{userData.city}
-            </ListGroupItem>
-            <ListGroupItem variant="info">
-              Address: {userData.address}
-            </ListGroupItem>
-            <ListGroupItem variant="success">
-              Date of Birth: {userData.dob}
-            </ListGroupItem>
-            <ListGroupItem>
-              <br></br>
-            </ListGroupItem>
-          </ListGroup>
-          <Card.Body style={{ justify: "center" }}>
-            <Link to={"/Editprofile"}>
-              <Button variant="primary">Update</Button>
-            </Link>
-          </Card.Body>
-        </Card>
-        {/* <div>
-          <p>Name: {userData.name}</p>
-        </div>
-        <br></br>
-        <div>
-          <p>Email: {userData.email}</p>
-        </div>
-        <br></br>
-        <div>
-          <p>Address: {userData.address}</p>
-        </div>
-        <br></br>
-        <div>
-          <p>Phone: {userData.phone}</p>
-        </div>
-        <br></br>
-        <div>
-          <p>City: {userData.city}</p>
-        </div>
-        <br></br>
-        <div>
-          <p>State: {userData.state}</p>
-        </div>
-        <br></br>
-        <div>
-          <p>Date of Birth: {userData.dob}</p>
-        </div>
-        <br></br> */}
-      </form>
+        <form method="POST">
+          <Card style={{ width: "23rem" }}>
+            <Card.Header>Your Profile</Card.Header>
+            <ListGroup className="list-group-flush">
+              <ListGroupItem variant="success">
+                Name:&emsp;{userData.name}
+              </ListGroupItem>
+              <ListGroupItem variant="info">
+                Email:&emsp;{userData.email}
+              </ListGroupItem>
+              <ListGroupItem variant="success">
+                Phone:&emsp;{userData.phone}
+              </ListGroupItem>
+              <ListGroupItem variant="info">
+                City:&emsp;{userData.city}
+              </ListGroupItem>
+              <ListGroupItem variant="success">
+                State:&emsp;{userData.city}
+              </ListGroupItem>
+              <ListGroupItem variant="info">
+                Address: {userData.address}
+              </ListGroupItem>
+              <ListGroupItem variant="success">
+                Date of Birth: {userData.dob}
+              </ListGroupItem>
+              <ListGroupItem>
+                <br></br>
+              </ListGroupItem>
+            </ListGroup>
+            <Card.Body style={{ justify: "center" }}>
+              <Link to={"/Editprofile"}>
+                <Button variant="primary">Update</Button>
+              </Link>
+            </Card.Body>
+          </Card>
+        </form>
+      </div>
     </>
   );
 };

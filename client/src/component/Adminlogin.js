@@ -1,24 +1,21 @@
-import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { UserContext } from "../App";
+import React, { useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import Adminpanel from "./Adminpanel";
 
-const Login = () => {
-  const { state, dispatch } = useContext(UserContext);
-
+const Adminlogin = () => {
   const history = useHistory();
-
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const loginUser = async (e) => {
+  const loginAdmin = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("/signin", {
+    const res = await fetch("/adminsignin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email,
+        username,
         password,
       }),
     });
@@ -28,16 +25,16 @@ const Login = () => {
     if (res.status === 400 || !data) {
       window.alert("Invalid Credentials");
     } else {
-      dispatch({ type: "USER", payload: true });
-      window.alert("Login Successful");
-      history.push("/");
+      window.alert("Welcome Admin");
+      history.push("/Adminpanel");
     }
   };
+
   return (
     <>
       <div className="login">
         <div className="container">
-          <div className="title">Login</div>
+          <div className="title">Admin-Login</div>
           <div className="content">
             <form method="POST">
               <div class="user-details">
@@ -50,9 +47,9 @@ const Login = () => {
                     name="email"
                     id="email"
                     autocomplete="off"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter Your Email"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Enter Your Username"
                   />
                 </div>
                 <br></br>
@@ -78,15 +75,30 @@ const Login = () => {
                   name="signin"
                   id="signin"
                   value="LogIn"
-                  onClick={loginUser}
+                  onClick={loginAdmin}
                 />
               </div>
             </form>
           </div>
         </div>
       </div>
+      {/* <form method="POST">
+                <div>
+                    <label htmlFor="username">Username:&emsp;</label>
+                    <input type="text" name="username" id="username" autocomplete="off" value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter Your Username" />
+                </div>
+                <br></br>
+                <div>
+                    <label htmlFor="password">Password:&emsp;</label>
+                    <input type="password" name="password" autocomplete="off" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter Your Password" />
+                </div>
+                <br></br>
+                <div>
+                    <input type="submit" name="adminsignin" id="adminsignin" value="Login" onClick={loginAdmin} />
+                </div>
+            </form> */}
     </>
   );
 };
 
-export default Login;
+export default Adminlogin;

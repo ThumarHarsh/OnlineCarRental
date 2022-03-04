@@ -2,7 +2,9 @@ import React from "react";
 import harsh from "../team_imgs/harsh.jpg";
 import shail from "../team_imgs/shail.jpg";
 import "./OurTeam.css";
-
+import Adminlogin from "./Adminlogin";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 class OurTeam extends React.Component {
   render() {
     return (
@@ -28,7 +30,7 @@ class OurTeam extends React.Component {
             <img src={shail} alt="" />
             <div className="team-member">
               <h2>Shail Shah</h2>
-              <p className="title">Co-Founder & CEO</p>
+              <p className="title">Co-Founder & CFO</p>
               <p>
                 To me, business isn’t about wearing suits or pleasing
                 stockholders. It’s about being true to yourself, your ideas and
@@ -37,6 +39,13 @@ class OurTeam extends React.Component {
               <p className="member-email">shailshah@gmail.com</p>
             </div>
           </div>
+        </div>
+        <div className="row1">
+          <Link to={"/adminlogin"}>
+            <Button variant="secondary" size="lg">
+              Admin Login
+            </Button>
+          </Link>
         </div>
       </div>
     );

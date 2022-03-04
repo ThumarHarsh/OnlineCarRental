@@ -59,7 +59,7 @@ const Registercar = () => {
     } else {
       window.alert("Registration Successful");
       console.log("Registration Successful");
-      history.push("/");
+      history.push("/adminpanel");
     }
   };
 
@@ -105,7 +105,18 @@ const Registercar = () => {
                   <label htmlFor="carclass" className="details">
                     Car Class:&emsp;
                   </label>
-                  <input
+                  <select
+                    name="carclass"
+                    id="carclass"
+                    value={car.carclass}
+                    onChange={handleInputs}
+                  >
+                    <option value="Hatchback">Hatchback</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Compact SUV">Compact SUV</option>
+                  </select>
+                  {/* <input
                     type="text"
                     name="carclass"
                     id="carclass"
@@ -113,14 +124,23 @@ const Registercar = () => {
                     value={car.carclass}
                     onChange={handleInputs}
                     placeholder="Enter The Car Class"
-                  />
+                  /> */}
                 </div>
                 <br></br>
                 <div className="input-box">
                   <label htmlFor="transmissiontype" className="details">
                     Car Transmission Type:&emsp;
                   </label>
-                  <input
+                  <select
+                    name="transmissiontype"
+                    id="transmissiontype"
+                    value={car.transmissiontype}
+                    onChange={handleInputs}
+                  >
+                    <option value="AUTO">AUTO</option>
+                    <option value="Manual">Manual</option>
+                  </select>
+                  {/* <input
                     type="text"
                     name="transmissiontype"
                     id="transmissiontype"
@@ -128,14 +148,26 @@ const Registercar = () => {
                     value={car.transmissiontype}
                     onChange={handleInputs}
                     placeholder="Enter The Transmission Type"
-                  />
+                  /> */}
                 </div>
                 <br></br>
                 <div className="input-box">
                   <label htmlFor="seatingcapacity" className="details">
                     Car Seating Capacity:&emsp;
                   </label>
-                  <input
+                  <select
+                    name="seatingcapacity"
+                    id="seatingcapacity"
+                    value={car.seatingcapacity}
+                    onChange={handleInputs}
+                  >
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="10">10</option>
+                  </select>
+                  {/* <input
                     type="text"
                     name="seatingcapacity"
                     id="seatingcapacity"
@@ -143,14 +175,25 @@ const Registercar = () => {
                     value={car.seatingcapacity}
                     onChange={handleInputs}
                     placeholder="Enter The Seating Capacity"
-                  />
+                  /> */}
                 </div>
                 <br></br>
                 <div className="input-box">
                   <label htmlFor="fueltype" className="details">
                     Car Fuel Type:&emsp;
                   </label>
-                  <input
+                  <select
+                    name="fueltype"
+                    id="fueltype"
+                    value={car.fueltype}
+                    onChange={handleInputs}
+                  >
+                    <option value="Petrol">Petrol</option>
+                    <option value="Diesal">Diesal</option>
+                    <option value="CNG">CNG</option>
+                    <option value="Electric">Electric</option>
+                  </select>
+                  {/* <input
                     type="text"
                     name="fueltype"
                     id="fueltype"
@@ -158,7 +201,7 @@ const Registercar = () => {
                     value={car.fueltype}
                     onChange={handleInputs}
                     placeholder="Enter The Fuel Type"
-                  />
+                  /> */}
                 </div>
                 <br></br>
                 <div className="input-box">
